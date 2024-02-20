@@ -8,7 +8,7 @@ export default function App(){
     <div className="App">
         <Routes>
             <Route exact path='/' element={<Home/>}/>
-            <Route exact path='/filter' element={<Swipescreen/>}/>
+            <Route exact path='/swipe' element={<Swipescreen/>}/>
         </Routes>
     </div>
     )

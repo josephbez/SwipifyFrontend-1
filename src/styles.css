@@ -3,3 +3,27 @@
     font-size: 40px;
     font-family: "Helvetica", Sans-Serif;
 }
+.underTitle {
+    text-align: center;
+    font-size: 25px;
+    font-family: "Helvetica", Sans-Serif;
+}
+ul{
+    list-style-type: none;
+}
+.centered-list{
+    text-align: center;
+}
+.playlist-button{
+  background-color: #19508b;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
