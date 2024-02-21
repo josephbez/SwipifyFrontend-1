@@ -1,29 +1,33 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import Login from './Login'
+import WebPlayback from './WebPlayback'
+import WelcomeScreen from './WelcomeScreen'
 
 export default function Home(){
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+
+        async function getToken() {
+            const response = await fetch('http://localhost:8000/auth/token');
+            console.log(response);
+            const json = await response.json();
+            setToken(json.access_token);
+        }
+
+    getToken();
+
+  }, []);
+
 
     return (
-    <>
-      <div className="Title">Welcome to Swipify</div>
-      <div className="underTitle">Select a playlist and start swiping</div>
-      <ul className='centered-list'>
-        <Playlist name={'first playlist'}/>
-        <Playlist name={'second playlist'}/>
-        <Playlist name={'third playlist'}/>
-      </ul>
-    </>
-    )
-
-}
-
-function Playlist( {name} ){ //more params later, params passed by backend
-    const navigate = useNavigate();
-    return (
-        <li>
-            <button onClick={() => {navigate('/swipe')}} className = "playlist-button">
-                {name}
-            </button>
-        </li>
+        <>
+        { (token === '') ? <Login/> :
+            <>
+                 <WelcomeScreen/>
+            </>
+        }
+        </>
     )
 }
+
