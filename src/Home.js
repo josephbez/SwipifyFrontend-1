@@ -10,7 +10,7 @@ export default function Home(){
       <ul className='centered-list'>
         <Playlist name={'first playlist'}/>
         <Playlist name={'second playlist'}/>
-        <Playlist name={'third playlist'}/>
+        <Playlist name={'third playlist of lam'}/>
       </ul>
     </>
     )
