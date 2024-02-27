@@ -1,0 +1,92 @@
+.montserrat {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+  }
+
+.Title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 30px;
+    font-size: 50px;
+    font-family: 'Montserrat', Sans-Serif;
+}
+.name {
+    font-size: 20px;
+    font-family: 'Montserrat', Sans-Serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #4caf50
+}
+
+.subheading {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -100px;
+    padding: 100px;
+    font-size: 30px;
+    font-family: 'Montserrat', Sans-Serif;
+}
+
+ul{
+    list-style-type: none;
+}
+.playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust width as needed */
+    grid-gap: 100px; /* Adjust gap as needed */
+    padding: 100px;
+    margin: 0 auto; /* Center the grid if needed */
+}
+
+.playlist-card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers children horizontally in a flex column */
+    text-align: center; /* Centers text for each child */
+  }
+
+.album-cover {
+    width: 100%; /* Full width of the card */
+    height: 200px; /* Set a fixed height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  /*  border-radius: 4px; /* Optional: for rounded corners */
+}
+
+.delete-list{
+    float:left;
+}
+.keep-list{
+    float:right;
+    margin-right:30px;
+}
+.center{
+    width:200px;
+    height:200px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+.playlist-button{
+  background-color: #19508b;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}

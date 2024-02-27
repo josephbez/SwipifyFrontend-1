@@ -1,0 +1,69 @@
+html, body, #root {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.swipe-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh; /* Full height of the viewport */
+}
+  
+.playlist-title {
+    margin-bottom: 20px;
+}
+
+.tracklist-container {
+    margin-left: 0px;
+    margin-top: 0px;
+    font-size: 20px;
+}
+  
+.album-cover-placeholder {
+    width: 300px; /* Adjust size as needed */
+    height: 300px;
+    background-color: 'https://i.kym-cdn.com/photos/images/newsfeed/002/735/674/45f.jpg'; /* Placeholder color */
+    margin-bottom: 20px;
+}
+  
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Adjust based on the size of the buttons or container */
+    max-width: 600px; /* Ensures buttons don't spread too far apart on wider screens */
+    font-family: 'Montserrat', sans-serif;
+}
+  
+.button {
+    padding: 10px 20px; /* Adjust padding as needed */
+    margin: 0 10px; /* Spacing between buttons */
+    /* Add additional styles for buttons (colors, borders, etc.) */
+    font-family: 'Montserrat', sans-serif;
+
+}
+  
+.decline {
+    /* Styles specific to the decline button */
+    font-family: 'Montserrat', sans-serif;
+
+}
+  
+.undo {
+    /* Adjust this to position it more to the left within the container if needed */
+    font-family: 'Montserrat', sans-serif;
+
+}
+  
+.add {
+    /* Adjust this to position it more to the right within the container if needed */
+    font-family: 'Montserrat', sans-serif;
+
+}
+  
+.skip {
+    /* Styles specific to the skip button */
+    font-family: 'Montserrat', sans-serif;
+
+}
+  
