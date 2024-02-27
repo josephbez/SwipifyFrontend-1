@@ -1,16 +1,24 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 import Playlist from './Playlist'
 
-export default function WelcomeScreen({token}) {
+export default function WelcomeScreen(){
     return (
-    <>
-      <div className="Title">Welcome to Swipify</div>
-      <div className="underTitle">Select a playlist and start swiping</div>
-      <ul className='centered-list'>
-        <Playlist name={'first playlist'} token = {token}/>
-        <Playlist name={'second playlist'} token = {token}/>
-        <Playlist name={'third playlist'} token = {token}/>
-      </ul>
-    </>
+        <>
+            <div className="Title"><b>SWIPIFY</b></div>
+            <div className="subheading">SELECT. SWIPE. SAVE.</div>
+            <div className='playlist-grid'>
+                <Playlist name={'first playlist'}/>
+                <Playlist name={'second playlist'}/>
+                <Playlist name={'third playlist'}/>
+                <Playlist name={'third playlist'}/>
+                <Playlist name={'third playlist'}/>
+                <Playlist name={'third playlist'}/>
+                <Playlist name={'third playlist'}/>
+                <Playlist name={'third playlist'}/>
+                <Playlist name={'third playlist'}/>
+                <Playlist name={'third playlist'}/>
+            </div>
+        </>
     )
 }
