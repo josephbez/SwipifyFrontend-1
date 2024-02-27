@@ -1,6 +1,8 @@
 import React from 'react'
+import WebPlayback from './WebPlayback'
 
-export default function Swipescreen(){
+
+export default function Swipescreen({token}){
     const albumCoverUrl = 'https://i.kym-cdn.com/photos/images/newsfeed/002/735/674/45f.jpg'; // Replace with your actual URL
 
     const playlistObj = { // This will be obtained from the backend
@@ -17,6 +19,7 @@ export default function Swipescreen(){
           </div>
           <div className="swipe-screen">
             <h2 className="playlist-title">Lam's Super Cool Playlist</h2>
+                <WebPlayback token={token} />
             <img src={albumCoverUrl} alt="Album Cover" className="album-cover-placeholder"/>
             <div className="buttons-container">
               <button className="button decline">Remove</button>
