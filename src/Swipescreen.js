@@ -32,30 +32,10 @@ export default function Swipescreen({ token }) {
         return <div>Loading...</div>;
     }
 
-    const listTracks = tracks.map((track) => track ?
-        {
-            name: track.track.name,
-            id: track.track.id,
-            artist: '' + track.track.artists.map((artist) => artist.name),
-        }
-        : null);
-    let listItems = tracks.map((track) => track ?
-        <li key={track.track.id}>
-            name: {track.track.name}, id: {track.track.id}, artist: {'' + track.track.artists.map((artist) => artist.name)}
-        </li>
-        : null
-    )
-
-
     return (
         <div className="screen-container">
-            <div className="tracklist-container">
-                <select>
-                    {listTracks.map((item) => <option>{item.name}</option>)}
-                </select>
-            </div>
             <div className="swipe-screen">
-                {<WebPlayback token={token} track_list={tracks.map(item => item.track)} playlist_name= {name}/>}
+                {<WebPlayback token={token} track_list={tracks.map(item => item.track)} playlist_name={name} />}
             </div>
         </div>
     );

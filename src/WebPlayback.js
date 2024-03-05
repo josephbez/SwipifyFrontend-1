@@ -13,8 +13,14 @@ const track = {
     ]
 }
 
+/**
+ * 
+ * @function WebPlayback
+ * @functiondesc This component is responsible for the playback of 
+ * the playlist in the browser. It uses the Spotify Web Playback SDK 
+ * to play the playlist in the browser. 
+ */
 export default function WebPlayback(props) {
-
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
     const [player, setPlayer] = useState(undefined);
@@ -108,55 +114,54 @@ export default function WebPlayback(props) {
         setTrack(props.track_list[0]);
     }, [deviceId, props.token]);
 
-    if (!is_active || !gotTracks) {
-        return (
-            <>
-                <div className="container">
-                    <div className="main-wrapper">
-                        <b>Loading...</b>
-                    </div>
-                </div>
-            </>)
-    } else {
-        return (
-            <>
-                <div className="container">
-                    <div className="main-wrapper">
-                        <div className="playlist-name"> {props.playlist_name} </div>
-                        <img src={current_track?.album?.images[0]?.url}
-                            className="album-img" alt="" />
-                        <div className="now-playing">
-                            <div className="now-playing__name">{current_track?.name}</div>
-                            <div className="now-playing__artist">
-                                {current_track?.artists[0]?.name}
-                            </div>
-                            <button className="spotify-btn" onClick={() => {
-                                player.previousTrack()
-                            }} >
-                                <div>
-                                    Remove
-                                </div>
-                            </button>
-                            <button className='spotify-btn'> <div> Undo</div> </button>
-                            <button className="spotify-btn" onClick={() => {
-                                player.togglePlay()
-                            }} >
-                                <div>
-                                    {is_paused ? "PLAY" : "PAUSE"}
-                                </div>
-                            </button>
+    const handleClick = (action, current_track) => {
+        if (!player) return;
+        switch (action) {
+            case 'previous':
+                player.previousTrack();
+                break;
+            case 'toggle':
+                player.togglePlay();
+                break;
+            case 'next':
+                player.nextTrack();
+                break;
+            default:
+                break;
+        }
+    };
 
-                            <button className="spotify-btn" onClick={() => {
-                                player.nextTrack()
-                            }} >
-                                <div>
-                                    Keep
-                                </div>
-                            </button>
-                        </div>
+    if (!is_active || !gotTracks || !current_track) {
+        return <div className="loading">Loading...</div>;
+    }
+
+    return (
+        <>
+            <select>
+            {props.track_list.map((item) => <option>{item.name}</option>)}
+            </select>
+            <div className="container">
+                <div className="main-wrapper">
+                    <div className="playlist-name">{props.playlist_name}</div>
+                    <img src={current_track?.album?.images[0]?.url} className="album-img" alt="" />
+                    <div className="now-playing">
+                        <div className="now-playing__name">{current_track?.name}</div>
+                        <div className="now-playing__artist">{current_track?.artists[0]?.name}</div>
+                        <button className="spotify-btn" onClick={() => handleClick('previous', current_track)}>
+                            Remove
+                        </button>
+                        <button className='spotify-btn' onClick={() => handleClick('undo', current_track)}>
+                            Undo
+                        </button>
+                        <button className="spotify-btn" onClick={() => handleClick('toggle', current_track)}>
+                            {is_paused ? "PLAY" : "PAUSE"}
+                        </button>
+                        <button className="spotify-btn" onClick={() => handleClick('next', current_track)}>
+                            Keep
+                        </button>
                     </div>
                 </div>
-            </>
-        );
-    }
+            </div>
+        </>
+    );
 }

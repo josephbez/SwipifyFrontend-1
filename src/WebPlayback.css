@@ -46,3 +46,39 @@
     transform: scale(1.05);
     background-color: #21e065;
 }
+
+
+/* Style for the dropdown */
+select {
+    padding: 1rem 3rem;
+    border-radius: 9999px;
+    background-color: #1ED760;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transform-origin: center;
+    transition-property: transform, background-color;
+    transition-duration: 0.2s;
+    border: none;
+    margin: 0 5px;
+    position: absolute; /* Position the dropdown absolutely within the container */
+    left: 0; /* Align the dropdown to the left of the container */
+    top: 50%; /* Position the dropdown vertically centered */
+    transform: translateY(-50%); /* Adjust vertical position */
+}
+
+/* Style for dropdown options */
+select option {
+    background-color: #1ED760;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: bold;
+}
+
+/* Style for dropdown when hovering */
+select:hover {
+    background-color: #21e065;
+}
