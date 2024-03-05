@@ -19,6 +19,8 @@ export default function WebPlayback(props) {
     const [player, setPlayer] = useState(undefined);
     const [current_track, setTrack] = useState(track);
     const [deviceId, setDeviceId] = useState(null);
+    const [gotTracks, setGotTracks] = useState(false);
+    console.log("Tracks", props.track_list);
 
 
     useEffect(() => {
@@ -34,9 +36,7 @@ export default function WebPlayback(props) {
                 getOAuthToken: cb => { cb(props.token); },
                 volume: 0.5
             });
-            console.log("Player", player)
             setPlayer(player);
-            console.log("Player", player)
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
                 setDeviceId(device_id);
@@ -46,17 +46,16 @@ export default function WebPlayback(props) {
                 console.log('Device ID has gone offline', device_id);
             });
 
-            player.addListener('player_state_changed', ( state => {
+            player.addListener('player_state_changed', (state => {
 
                 if (!state) {
                     return;
                 }
-
                 setTrack(state.track_window.current_track);
                 setPaused(state.paused);
 
-                player.getCurrentState().then( state => { 
-                    (!state)? setActive(false) : setActive(true) 
+                player.getCurrentState().then(state => {
+                    (!state) ? setActive(false) : setActive(true)
                 });
 
             }));
@@ -66,12 +65,13 @@ export default function WebPlayback(props) {
 
     // This function transfers active playback to the Spotify session in the browser
     useEffect(() => {
-        async function transferPlayback()  {
+        async function transferPlayback() {
             await fetch('https://api.spotify.com/v1/me/player', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + props.token},
+                    'Authorization': 'Bearer ' + props.token
+                },
                 body: JSON.stringify({
                     device_ids: [
                         deviceId
@@ -85,8 +85,29 @@ export default function WebPlayback(props) {
         }
     }, [deviceId])
 
+    useEffect(() => {
+        const track_uris = props.track_list.map(track => track.uri);
+        if (deviceId) {
+            fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${props.token}`
+                },
+                body: JSON.stringify({
+                    uris: track_uris,
+                    offset: { position: 0 }
+                })
+            })
+                .then(response => response.json())
+                .then(data => console.log('Playing playlist:', data))
+                .catch(error => console.error('Error playing playlist:', error));
+        }
+        setGotTracks(true);
+        setTrack(props.track_list[0]);
+    }, [deviceId, props.token]);
 
-    if (!is_active) { 
+    if (!is_active || !gotTracks) {
         return (
             <>
                 <div className="container">
@@ -101,18 +122,18 @@ export default function WebPlayback(props) {
                 <div className="container">
                     <div className="main-wrapper">
 
-                        <img src={current_track.album.images[0].url} className="now-playing__cover" alt="" />
+                        <img src={current_track?.album?.images[0]?.url} className="now-playing__cover" alt="" />
 
                         <div className="now-playing__side">
-                            <div className="now-playing__name">{current_track.name}</div>
-                            <div className="now-playing__artist">{current_track.artists[0].name}</div>
+                            <div className="now-playing__name">{current_track?.name}</div>
+                            <div className="now-playing__artist">{current_track?.artists[0]?.name}</div>
 
                             <button className="btn-spotify" onClick={() => { player.previousTrack() }} >
                                 &lt;&lt;
                             </button>
 
                             <button className="btn-spotify" onClick={() => { player.togglePlay() }} >
-                                { is_paused ? "PLAY" : "PAUSE" }
+                                {is_paused ? "PLAY" : "PAUSE"}
                             </button>
 
                             <button className="btn-spotify" onClick={() => { player.nextTrack() }} >
