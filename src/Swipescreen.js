@@ -12,6 +12,7 @@ export default function Swipescreen({ token }) {
     const [tracks, setTracks] = useState([null]);
     const [tracksToRemove, setTracksToRemove] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [trackCounter, setTrackCounter] = useState(0);
 
     useEffect(() => {
         async function getTracks(playlist_id) {
