@@ -54,14 +54,7 @@ export default function Swipescreen({ token }) {
                 </select>
             </div>
             <div className="swipe-screen">
-                <h2 className="playlist-title">{name}</h2>
-                {<WebPlayback token={token} track_list={tracks.map(item => item.track)} />}
-                <div className="buttons-container">
-                    <button className="button decline">Remove</button>
-                    <button className="button undo">Undo</button>
-                    <button className="button add">Add</button>
-                    <button className="button skip">Next Song</button>
-                </div>
+                {<WebPlayback token={token} track_list={tracks.map(item => item.track)} playlist_name= {name}/>}
             </div>
         </div>
     );
