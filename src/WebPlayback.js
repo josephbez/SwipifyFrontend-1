@@ -148,16 +148,16 @@ export default function WebPlayback(props) {
                         <div className="now-playing__name">{current_track?.name}</div>
                         <div className="now-playing__artist">{current_track?.artists[0]?.name}</div>
                         <button className="spotify-btn" onClick={() => handleClick('previous', current_track)}>
-                            Remove
+                            <i className="fas fa-trash"></i> {/* Replace "Remove" with a trash icon */}
                         </button>
                         <button className='spotify-btn' onClick={() => handleClick('undo', current_track)}>
-                            Undo
+                            <i className="fas fa-undo"></i> {/* Replace "Undo" with a backwards arrow */}
                         </button>
                         <button className="spotify-btn" onClick={() => handleClick('toggle', current_track)}>
-                            {is_paused ? "PLAY" : "PAUSE"}
+                            {is_paused ? <i className="fas fa-play"></i> : <i className="fas fa-pause"></i>} {/* Play or Pause icon depending on is_paused */}
                         </button>
                         <button className="spotify-btn" onClick={() => handleClick('next', current_track)}>
-                            Keep
+                            <i className="fas fa-arrow-right"></i> {/* Replace "Keep" with a right arrow */}
                         </button>
                     </div>
                 </div>

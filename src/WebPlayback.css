@@ -1,11 +1,19 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensure it takes at least the full height of the viewport */
     text-align: center;
 }
 
 .album-img {
-    border-radius: 9%;
-    border: 2px solid #708090;
-    width: 80%;
+    /* border-radius: 9%; */
+    width: 300px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+    object-fit: cover; /* This ensures the image covers the space without distorting aspect ratio */
+    /* border: 2px solid #13924e; */
+    /* width: 80%; */
 }
 
 .playlist-name {
@@ -16,15 +24,20 @@
 }
 
 .now-playing__name {
-    font-size: 2em;
+    /* font-size: 2em; */
+    font-size: 16px; /* Adjust the font size as needed */
     font-weight: 500;
     color: white;
-    margin-bottom: 5px;
+    padding: 0.5rem 0; /* Add some vertical padding */
+
+    /* margin-bottom: 5px; */
 }
 
 .now-playing__artist {
     color: white;
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
+    font-size: 16px; /* Adjust the font size as needed */
+    padding-bottom: 1rem;
 }
 
 .spotify-btn {
@@ -50,22 +63,25 @@
 
 /* Style for the dropdown */
 select {
-    padding: 1rem 3rem;
-    border-radius: 9999px;
-    background-color: #1ED760;
-    font-weight: bold;
-    color: #ffffff;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transform-origin: center;
+
+
+    max-width: 300px; /* Limit the width of the select bar */
+    overflow: hidden; /* Prevent text from overflowing */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+    white-space: nowrap; /* Prevent text from wrapping to new lines */
+    position: absolute; /* Use absolute positioning */
+    top: 100px; /* Position near top to avoid overlapping main content */
+    right: 100px; /* Keep it on the right for large screens */
+    z-index: 1000; /* Ensure it sits above other content */
+    padding: 0.75rem 1rem; /* Increase padding for a larger appearance */
+    border-radius: 8px; /* Rounded corners for aesthetics */
+    background-color: #1ED760; /* Background color */
+    color: white; /* Text color */
+    font-weight: bold; /* Bold font */
     transition-property: transform, background-color;
-    transition-duration: 0.2s;
-    border: none;
-    margin: 0 5px;
-    position: absolute; /* Position the dropdown absolutely within the container */
-    left: 0; /* Align the dropdown to the left of the container */
-    top: 50%; /* Position the dropdown vertically centered */
+    text-transform: uppercase;
     transform: translateY(-50%); /* Adjust vertical position */
+
 }
 
 /* Style for dropdown options */
@@ -81,4 +97,27 @@ select option {
 /* Style for dropdown when hovering */
 select:hover {
     background-color: #21e065;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    /* Adjustments for medium-sized screens and tablets */
+    select {
+        max-width: 200px; /* Slightly smaller to fit medium screens */
+        padding: 0.5rem 1rem;
+        top: 10px; /* Adjust to ensure it doesn't block content */
+        right: 10px; /* Adjust for consistency */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjustments for small screens and mobile devices */
+    select {
+        position: fixed; /* Use fixed to ensure it's always accessible on mobile */
+        bottom: 20px; /* Move to bottom for easier access on mobile */
+        right: 20px; /* Keep it at the bottom-right corner */
+        width: auto; /* Allow it to adjust width based on content */
+        max-width: 80%; /* Prevent it from taking full width */
+        padding: 10px; /* Ensure it's touch-friendly */
+    }
 }
