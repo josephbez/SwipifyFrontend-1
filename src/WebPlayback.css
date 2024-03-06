@@ -79,7 +79,6 @@ select {
     color: white; /* Text color */
     font-weight: bold; /* Bold font */
     transition-property: transform, background-color;
-    text-transform: uppercase;
     transform: translateY(-50%); /* Adjust vertical position */
 
 }
