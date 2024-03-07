@@ -6,66 +6,38 @@ import { useLocation } from 'react-router-dom'
 
 
 
-export default function Swipescreen({token}){
-    const albumCoverUrl = 'https://i.kym-cdn.com/photos/images/newsfeed/002/735/674/45f.jpg'; // Replace with your actual URL
-    const {state} = useLocation();
+export default function Swipescreen({ token }) {
+    const { state } = useLocation();
     const { playlist_id, name } = state;
     const [tracks, setTracks] = useState([null]);
     const [tracksToRemove, setTracksToRemove] = useState([]);
-    
-
+    const [loading, setLoading] = useState(true);
+    const [trackCounter, setTrackCounter] = useState(0);
 
     useEffect(() => {
-
         async function getTracks(playlist_id) {
             const response = await fetch('http://localhost:8000/tracks?' + new URLSearchParams({
                 playlist_id: playlist_id,
             }));
-            console.log(response);
             const json = await response.json();
+            console.log("Tracks: ", json);
             setTracks(json);
-            console.log('HI')
-            console.log(json);
+            setLoading(false);
         }
-
-        console.log('checkpoint1')
         getTracks(playlist_id);
 
     }, []);
-    
+    console.log("Tracks: ", tracks);
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
-    let listItems = tracks.map((track) => track ? 
-        <li key={track.track.id}>
-            name: {track.track.name}, id: {track.track.id}, artist: {'' + track.track.artists.map((artist) => artist.name)}
-            <img src={track.track.album.images[1].url}></img>
-        </li>
-        : null
-    )
-
-  
-      return (
+    return (
         <div className="screen-container">
-          <div className="tracklist-container">
-            {/* <div className='Deleted-tracks'>Deleted Tracks</div>
-            {playlistObj.tracks.map((track, index) => (
-            <div key={index} className="track">{track}</div>
-            ))} */}
-            <ul>
-                {listItems}
-            </ul>
-          </div>
-          <div className="swipe-screen">
-            <h2 className="playlist-title">{name}</h2>
-                {/* <WebPlayback token={token} /> */}
-            <img src={albumCoverUrl} alt="Album Cover" className="album-cover-placeholder"/>
-            <div className="buttons-container">
-              <button className="button decline">Remove</button>
-              <button className="button undo">Undo</button>
-              <button className="button add">Add</button>
-              <button className="button skip">Next Song</button>
+            <div className="swipe-screen">
+                {<WebPlayback token={token} track_list={tracks.map(item => item.track)} playlist_name={name} />}
             </div>
-          </div>
         </div>
-      );
+    );
 }
 

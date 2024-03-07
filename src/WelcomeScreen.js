@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Playlist from './Playlist'
 
 export default function WelcomeScreen(){
-    const [playlists, setPlaylists] = useState([{name: "p1", id : "id1"},{name: "p2", id : "id2"}]);
+    const [playlists, setPlaylists] = useState([{name: "Loading...", id : ""}]);
 
     useEffect(() => {
 
